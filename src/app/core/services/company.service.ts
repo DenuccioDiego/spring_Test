@@ -12,12 +12,12 @@ export class CompanyService {
   constructor(private Http: HttpClient) { }
 
   public getAllCompany(): Observable<Company[]> {
-    const url = environment.baseUrl + '/company';
+    const url = environment.baseUrl + '/companies';
     return this.Http.get<Company[]>(url);
   }
 
   public getOneCompanyById(companyId: number): Observable<Company> {
-    const url = environment.baseUrl + '/company/' + companyId;
+    const url = environment.baseUrl + '/companies/' + companyId;
     return this.Http.get<Company>(url);
   }
 }
