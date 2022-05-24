@@ -20,7 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule
   ],
   exports: [
-    CompanyContainerComponent
+
   ]
 })
 export class CompanyModule { }

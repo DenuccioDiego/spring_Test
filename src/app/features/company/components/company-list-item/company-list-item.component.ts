@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Company } from 'src/app/shared/model/company-model.model';
 
 @Component({
   selector: 'spring-company-list-item',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyListItemComponent implements OnInit {
 
+  @Input() companyItem: Company
+
   constructor() { }
 
+  @Output() selectionCompany: EventEmitter<Company> = new EventEmitter<Company>();
+
   ngOnInit(): void {
+  }
+
+  public selectionHandler(): void {
+    this.selectionCompany.emit(this.companyItem)
   }
 
 }

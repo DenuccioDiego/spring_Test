@@ -1,1 +1,26 @@
-<p>company-container works!</p>
+<!-- <ng-template [ngIf]="loading" [ngIfElse]="companyListRef">
+    <p>loading</p>
+</ng-template>
+
+<ng-template #companyListRef>
+
+    caricato
+</ng-template> -->
+
+<ng-container [ngSwitch]="loading">
+    <div *ngSwitchCase="'loading'">
+        Inner content 1
+    </div>
+    <div *ngSwitchCase="'loaded'">
+        <spring-company-list-item *ngFor="let company of companyList" [companyItem]="company"
+            (selectionCompany)="selectionHandler($event)">
+
+        </spring-company-list-item>
+    </div>
+    <div *ngSwitchCase="'error'">
+        Inner content 3
+    </div>
+    <div *ngSwitchCase="'empity'">
+        Inner content 4
+    </div>
+</ng-container>

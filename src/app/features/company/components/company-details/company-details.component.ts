@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CompanyService } from 'src/app/core/services/company.service';
+import { Company } from 'src/app/shared/model/company-model.model';
 
 @Component({
   selector: 'spring-company-details',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyDetailsComponent implements OnInit {
 
-  constructor() { }
+  companyDetail: Company
+  loading: string = "loading"
+
+  constructor(private route: ActivatedRoute, private companyService: CompanyService) {
+
+  }
 
   ngOnInit(): void {
+
+    this.route.params.subscribe({
+      next: (p) => this.requestDetailCompany(p['companyId']),
+      error: (e) => this.loading = "error"
+    })
+  }
+
+  public requestDetailCompany(companyId: number) {
+    this.companyService.getOneCompanyById(companyId).subscribe({
+      next: (v) => this.companyDetail = v,
+      error: (e) => this.loading = "error",
+      complete: () => this.loading = this.companyDetail != undefined ? "loaded" : "empity"
+    })
   }
 
 }
+
+
